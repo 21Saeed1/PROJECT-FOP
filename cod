@@ -1,0 +1,88 @@
+#include <iostream> 
+using namespace std;
+
+#define ARRAY_Size 100  
+
+
+struct Student 
+{
+    string firstName;
+    string fatherName;
+    string familyName;
+    string fullName;
+    int Student_id;
+    
+    void createFullName() {
+        fullName = firstName + " " + fatherName + " " + familyName;
+    }
+};
+
+
+void addStudent(Student student[], int & number_of_student) 
+{
+    if (number_of_student < ARRAY_Size) {
+        Student newStudent;
+
+        cout << "Enter first name: ";
+        cin >> newStudent.firstName;
+        cout << "\nEnter father name: ";
+        cin >> newStudent.fatherName;
+        cout << "\nEnter family name: ";
+        cin >> newStudent.familyName;
+        cout << "\nEnter Student ID: ";
+        cin >> newStudent.Student_id;
+
+        newStudent.createFullName();
+
+        student[number_of_student] = newStudent;
+        number_of_student++;  
+    } else {
+        cout << "Cannot add more students, limit reached.\n";
+    }
+}
+
+void updateStudent(Student students[], int number_of_student, int studentId) 
+{
+    bool found = false;
+    for (int i = 0; i < number_of_student; ++i) {
+        if (students[i].Student_id == studentId) {
+            cout << "Updating student with ID " << studentId << endl;
+            cout << "Enter new first name: ";
+            cin >> students[i].firstName;
+            cout << "Enter new father name: ";
+            cin >> students[i].fatherName;
+            cout << "Enter new family name: ";
+            cin >> students[i].familyName;
+            students[i].createFullName();
+            found = true;
+            cout << "Student updated successfully!" << endl;
+            break;
+        }
+    }
+    if (!found) {
+        cout << "Student with ID " << studentId << " not found." << endl;
+    }
+}
+
+void deleteStudent(Student students[], int& number_of_student, int studentId) 
+{
+    bool found = false;
+    for (int i = 0; i < number_of_student; ++i) 
+    {
+        if (students[i].Student_id == studentId) 
+        {
+            for (int j = i; j < number_of_student - 1; ++j) 
+            {
+                students[j] = students[j + 1];  
+            }
+            number_of_student--;  
+            found = true;
+            cout << "Student with ID " << studentId << " deleted successfully!" << endl;
+            break;
+        }
+    }
+    if (!found) {
+        cout << "Student with ID " << studentId << " not found." << endl;
+    }
+}
+
