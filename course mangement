@@ -1,0 +1,99 @@
+#include <iostream>
+using namespace std;
+
+#define ARRAY_Size_courses_courses 100
+
+struct Course
+{
+    int courseId;
+    string courseName;
+    string courseCode;
+};
+
+
+
+ //The function to add course
+void addCourse(Course courses[], int & number_of_courses)
+{
+    if (number_of_courses < ARRAY_Size_courses_courses)
+    {
+        Course newCourse;
+
+        cout << "Enter Course ID: ";
+        cin >> newCourse.courseId;
+
+        cout << "Enter Course Name: ";
+        cin >> newCourse.courseName;
+
+        cout << "Enter Course Code: ";
+        cin >> newCourse.courseCode;
+
+        courses[number_of_courses] = newCourse;
+        number_of_courses++;
+
+        cout << "Course added successfully!\n";
+    }
+    else
+    {
+        cout << "Cannot add more courses, limit reached.\n";
+    }
+}
+
+
+//The function to update course
+void updateCourse(Course courses[], int number_of_courses, int courseId)
+{
+    bool found = false;
+
+    for (int i = 0; i < number_of_courses; ++i)
+    {
+        if (courses[i].courseId == courseId)
+        {
+            cout << "Updating course with ID " << courseId << endl;
+
+            cout << "Enter new Course Name: ";
+            cin >> courses[i].courseName;
+
+            cout << "Enter new Course Code: ";
+            cin >> courses[i].courseCode;
+
+            found = true;
+            cout << "Course updated successfully!\n";
+            break;
+        }
+    }
+
+    if (!found)
+    {
+        cout << "Course with ID " << courseId << " not found.\n";
+    }
+}
+
+
+//The function to delete course
+void deleteCourse(Course courses[], int & number_of_courses, int courseId)
+{
+    bool found = false;
+
+    for (int i = 0; i < number_of_courses; ++i)
+    {
+        if (courses[i].courseId == courseId)
+        {
+            for (int j = i; j < number_of_courses - 1; ++j)
+            {
+                courses[j] = courses[j + 1];
+            }
+
+            number_of_courses--;
+            found = true;
+
+            cout << "Course with ID " << courseId << " deleted successfully!\n";
+            break;
+        }
+    }
+
+    if (!found)
+    {
+        cout << "Course with ID " << courseId << " not found.\n";
+    }
+}
