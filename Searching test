@@ -1,1 +1,72 @@
 
+  //function to searching by the name of course 
+void searchCourseByName(Course courses[], int number_of_courses, string name)
+{
+    bool found = false;
+
+    for (int i = 0; i < number_of_courses; i++)
+    {
+        if (courses[i].courseName == name)
+        {
+            cout << "\nCourse found:\n";
+            cout << "ID: " << courses[i].courseId << endl;
+            cout << "Name: " << courses[i].courseName << endl;
+            cout << "Credit Hours: " << courses[i].creditHours << endl;
+
+            found = true;
+            break;
+        }
+    }
+
+    if (!found)
+    {
+        cout << "Course with name '" << name << "' not found.\n";
+    }
+}
+
+
+
+ //function to searching by course ID 
+void searchCourseById(Course courses[], int number_of_courses, int courseId)
+{
+    bool found = false;
+
+    for (int i = 0; i < number_of_courses; i++)
+    {
+        if (courses[i].courseId == courseId)
+        {
+            cout << "\nCourse found:\n";
+            cout << "ID: " << courses[i].courseId << endl;
+            cout << "Name: " << courses[i].courseName << endl;
+            cout << "Credit Hours: " << courses[i].creditHours << endl;
+
+            found = true;
+            break;
+        }
+    }
+
+    if (!found)
+    {
+        cout << "Course with ID " << courseId << " not found.\n";
+    }
+}
+
+
+
+
+   /* Asking the user to enter a course name and searching for it in the course list
+	 and calling the function searchCourseByName inside the main function */
+string name;
+cout << "Enter course name to search: ";
+cin >> name;
+searchCourseByName(courses, number_of_courses, name);
+
+
+
+   /* Asking the user to enter a course ID and searching for it in the course list
+	 and calling the function searchCourseById inside the main function */
+int id;
+cout << "Enter course ID to search: ";
+cin >> id;
+searchCourseById(courses, number_of_courses, id);
+
