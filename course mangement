@@ -1,13 +1,13 @@
 #include <iostream>
 using namespace std;
 
-#define ARRAY_Size_courses_courses 100
+#define ARRAY_Size_courses 100
 
 struct Course
 {
     int courseId;
     string courseName;
-    string courseCode;
+    int creditHours;
 };
 
 
@@ -15,7 +15,7 @@ struct Course
  //The function to add course
 void addCourse(Course courses[], int & number_of_courses)
 {
-    if (number_of_courses < ARRAY_Size_courses_courses)
+    if (number_of_courses < ARRAY_Size_courses)
     {
         Course newCourse;
 
@@ -25,8 +25,8 @@ void addCourse(Course courses[], int & number_of_courses)
         cout << "Enter Course Name: ";
         cin >> newCourse.courseName;
 
-        cout << "Enter Course Code: ";
-        cin >> newCourse.courseCode;
+        cout << "Enter credit hours: ";
+        cin >> newCourse.creditHours;
 
         courses[number_of_courses] = newCourse;
         number_of_courses++;
@@ -54,8 +54,8 @@ void updateCourse(Course courses[], int number_of_courses, int courseId)
             cout << "Enter new Course Name: ";
             cin >> courses[i].courseName;
 
-            cout << "Enter new Course Code: ";
-            cin >> courses[i].courseCode;
+            cout << "Enter new credit hours: ";
+            cin >> courses[i].creditHours;
 
             found = true;
             cout << "Course updated successfully!\n";
