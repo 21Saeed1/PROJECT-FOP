@@ -1,1 +1,369 @@
-Hello, every one. 
+#include <iostream> 
+#include <iomanip>
+#include<stdlib.h>
+#define ARRAY_Size 100  
+using namespace std;
+
+
+struct Student 
+{
+    string firstName;
+    string fatherName;
+    string familyName;
+    string fullName;
+    int Student_id;
+    
+    void createFullName() {
+        fullName = firstName + " " + fatherName + " " + familyName;
+    }
+};
+
+// The list that sotore all student.
+Student listOfStudent[ARRAY_Size];
+int numOfStudent=0;
+
+void greeting(){
+	
+	cout << string(50,'#');
+    cout << "\n\n"
+		 << setw(40)
+	     <<"Student Registration System.\n\n";
+	
+	for(int i = 0;i<50;i++)
+	    cout << '#';
+		 
+	cout <<"\n\n"
+		 <<"1.Add new Student/course.\n"
+		 <<"2.Assign/Remove courses for the students.\n"
+		 <<"3.Search and View student/course details.\n"
+		 <<"4.Update/Delete student record.\n"
+		 <<"5.Update/Delete course record.\n"
+		 <<"6.Students/courses report.\n"
+		 <<"7.Quit form the program.\n";
+		 
+	}
+	
+	
+void FirstOption(){
+	
+	int option;
+	system("cls");
+	cout << string(45,'#')
+		 << "\n\n"
+		 << setw(40)
+		 <<"Adding new Student/course.\n\n"
+		 << string(45,'#')<<endl
+		 << "\n1.Add new student.\n"
+		 << "2.Add new course.\n";
+	do{
+		cin>>option;
+		switch(option){
+		case 1:
+			// The adding student function();
+			break;
+		case 2:
+			// The adding Course function();
+			break;
+		default:
+			cout << "Invalid input"<<endl;
+	}
+	}while(option>2&&1<option);
+	
+	
+	
+}
+	
+void SecondOption(){
+	
+	int option;
+	system("cls");
+	cout << string(45,'#')
+		 << "\n\n"
+		 << setw(40)
+		 <<"Assign/Removing courses for a student.\n\n"
+		 << string(45,'#')<<endl
+		 << "\n1.Assign course to a student.\n"
+		 << "2.Remove course from a student.\n";
+	do{
+		cin>>option;
+	}while(option>2&&1<option);
+	
+	switch(option){
+		case 1:
+			// The assigning cousrse to student function();
+			break;
+		case 2:
+			// The Remove course from a student function();
+			break;
+		default:
+			cout << "Invalid input"<<endl;
+	}
+	
+}
+
+void ThirdOption(){
+	int option;
+	system("cls");
+	cout << string(45,'#')
+		 << "\n\n"
+		 << setw(40)
+		 <<"Searching and View student/course details.\n\n"
+		 << string(45,'#')<<endl
+		 << "\n1.Searching for a student.\n"
+		 << "2.Searching for a course.\n";
+	do{
+		cin>>option;
+	}while(option>2&&1<option);
+	
+	switch(option){
+		case 1:
+			// The Searching for a student function();
+			break;
+		case 2:
+			// The Searching for a course function();
+			break;
+		default:
+			cout << "Invalid input"<<endl;
+	}
+	
+}	
+
+void FourthOption(){
+	int option;
+	system("cls");
+	cout << string(45,'#')
+		 << "\n\n"
+		 << setw(40)
+		 <<"Updating and Deleting student record.\n\n"
+		 << string(45,'#')<<endl
+		 << "\n1.Delete a student record.\n"
+		 << "2.Update a student record.\n";
+	do{
+		cin>>option;
+	}while(option>2&&1<option);
+	
+	switch(option){
+		case 1:
+			// Delete a student record function();
+			break;
+		case 2:
+			// Update a student record function();
+			break;
+		default:
+			cout << "Invalid input"<<endl;
+	}
+	
+}	
+	
+void FifthOption(){
+
+	int option;
+	system("cls");
+	cout << string(45,'#')
+		 << "\n\n"
+		 << setw(40)
+		 <<"Updating and Deleting course record.\n\n"
+		 << string(45,'#')<<endl
+		 << "\n1.Delete a course record.\n"
+		 << "2.Update a course record.\n";
+	do{
+		cin>>option;
+	}while(option>2&&1<option);
+	
+	switch(option){
+		case 1:
+			// Delete a course record function();
+			break;
+		case 2:
+			// Update a course record function();
+			break;
+		default:
+			cout << "Invalid input"<<endl;
+	}
+	
+}	
+
+void SixthOption(){
+	
+	int option;
+	system("cls");
+	cout << string(45,'#')
+		 << "\n\n"
+		 << setw(40)
+		 <<"Students and courses report.\n\n"
+		 << string(45,'#')<<endl
+		 << "\n1.Students Report.\n"
+		 << "2.Couses Report.\n";
+	do{
+		cin>>option;
+	}while(option>2&&1<option);
+	
+	switch(option){
+		case 1:
+			// Students Report function();
+			break;
+		case 2:
+			// Couses Report function();
+			break;
+		default:
+			cout << "Invalid input"<<endl;
+	}
+}
+
+void addStudent(Student student[], int &number_of_student) 
+{
+    if (number_of_student < ARRAY_Size) {
+        Student newStudent;
+
+        cout << "Enter first name: ";
+        cin >> newStudent.firstName;
+        cout << "\nEnter father name: ";
+        cin >> newStudent.fatherName;
+        cout << "\nEnter family name: ";
+        cin >> newStudent.familyName;
+        cout << "\nEnter Student ID: ";
+        cin >> newStudent.Student_id;
+
+        newStudent.createFullName();
+
+        student[number_of_student] = newStudent;
+        number_of_student++;  
+    } else {
+        cout << "Cannot add more students, limit reached.\n";
+    }
+}
+
+void updateStudent(Student students[], int number_of_student, int studentId) 
+{
+    bool found = false;
+    for (int i = 0; i < number_of_student; ++i) {
+        if (students[i].Student_id == studentId) {
+            cout << "Updating student with ID " << studentId << endl;
+            cout << "Enter new first name: ";
+            cin >> students[i].firstName;
+            cout << "Enter new father name: ";
+            cin >> students[i].fatherName;
+            cout << "Enter new family name: ";
+            cin >> students[i].familyName;
+            students[i].createFullName();
+            found = true;
+            cout << "Student updated successfully!" << endl;
+            break;
+        }
+    }
+    if (!found) {
+        cout << "Student with ID " << studentId << " not found." << endl;
+    }
+}
+
+void deleteStudent(Student students[], int& number_of_student, int studentId) 
+{
+    bool found = false;
+    for (int i = 0; i < number_of_student; ++i) 
+    {
+        if (students[i].Student_id == studentId) 
+        {
+            for (int j = i; j < number_of_student - 1; ++j) 
+            {
+                students[j] = students[j + 1];  
+            }
+            number_of_student--;  
+            found = true;
+            cout << "Student with ID " << studentId << " deleted successfully!" << endl;
+            break;
+        }
+    }
+    if (!found) {
+        cout << "Student with ID " << studentId << " not found." << endl;
+    }
+}
+
+int main(){
+	bool program = true;
+	int option;
+	while(program){
+	system("cls");
+	greeting(); 
+	
+	do{
+		cout <<"Option:";
+		cin  >> option;
+	switch(option){
+		
+		case 1:
+			FirstOption();
+			break;
+		
+		case 2:
+			SecondOption();
+			break;
+			
+		case 3:
+			ThirdOption();
+			break;
+			
+		case 4:
+			FourthOption();
+			break;
+		
+		case 5:
+			FifthOption();
+			break;
+		
+		case 6:
+			SixthOption();
+			break;
+		
+		case 7:
+			program = false;
+			break;
+		default:
+			cout << "Invalid input"<<endl;			
+			}
+	
+	}
+	while(option>7 || option<1);
+	
+//	switch(optoin){
+//		case 1:
+//			firstOption();
+//			break;
+//		default:
+//			cout << "Invalid input";			
+//			}
+//	
+}
+	return 0;
+}
+
+
+
+//int main() {
+//    // Define column widths for consistency
+//    const int nameWidth = 15;
+//    const int scoreWidth = 10;
+//
+//    // 1. Print Table Header
+//    // Use std::left to align text to the left of the field
+//    std::cout << std::left << std::setw(nameWidth) << "NAME" 
+//              << std::left << std::setw(scoreWidth) << "SCORE" << std::endl;
+//
+//    // 2. Print Separator Line
+//    std::cout << std::setfill('-') << std::setw(nameWidth + scoreWidth) << "" << std::endl;
+//    std::cout << std::setfill(' '); // Reset fill character to space for data
+//
+//    // 3. Print Data Rows
+//    std::cout << std::left << std::setw(nameWidth) << "Alice" 
+//              << std::left << std::setw(scoreWidth) << 95 << std::endl;
+//
+//    std::cout << std::left << std::setw(nameWidth) << "Bob" 
+//              << std::left << std::setw(scoreWidth) << 88 << std::endl;
+//
+//    std::cout << std::left << std::setw(nameWidth) << "Charlie" 
+//              << std::left << std::setw(scoreWidth) << 100 << std::endl;
+//
+//    return 0;
+//}
+
+
+
