@@ -65,7 +65,7 @@ void addCourse()
         cout << "Cannot add more courses, limit reached.\n";
     }
     int input;
-    cout << "Press 0 to exit from applicatin or any number to get back to main page: ";
+    cout << "Press 0 to exit from application or any number to get back to main page: ";
     cin >> input;
     if (input ==0)
         program= false;
@@ -100,7 +100,7 @@ void updateCourse(int courseId)
         cout << "Course with ID " << courseId << " not found.\n";
     }
     int input;
-    cout << "Press 0 to exit from applicatin or any number to get back to main page: ";
+    cout << "Press 0 to exit from application or any number to get back to main page: ";
     cin >> input;
     if (input ==0)
         program= false;
@@ -133,7 +133,7 @@ void deleteCourse(int courseId)
     {
         cout << "Course with ID " << courseId << " not found.\n";
     }
-    cout << "Press 0 to exit from applicatin or any number to get back to main page: ";
+    cout << "Press 0 to exit from application or any number to get back to main page: ";
     int input;
     cin >> input;
     if (input ==0)
@@ -168,7 +168,7 @@ void addStudent()
         cout << "Cannot add more students, limit reached.\n";
     }
     int input;
-    cout << "\nPress 0 to exit from applicatin or any number to get back to main page: ";
+    cout << "\nPress 0 to exit from application or any number to get back to main page: ";
     cin >> input;
     if (input ==0)
         program= false;
@@ -273,7 +273,7 @@ void updateStudent(int studentId)
         cout << "Student with ID " << studentId << " not found." << endl;
     }
     int input;
-    cout << "Press 0 to exit from applicatin or any number to get back to main page: ";
+    cout << "Press 0 to exit from application or any number to get back to main page: ";
     cin >> input;
     if (input ==0)
         program= false;
@@ -304,7 +304,7 @@ void deleteStudent( int studentId)
         
     }
     int input;
-    cout << "Press 0 to exit from applicatin or any number to get back to main page: ";
+    cout << "Press 0 to exit from application or any number to get back to main page: ";
     cin >> input;
     if (input ==0)
         program= false;
@@ -331,7 +331,7 @@ void greeting(){
          <<"4.Update/Delete student record.\n"
          <<"5.Update/Delete course record.\n"
          <<"6.Students/courses report.\n"
-         <<"7.Quit form the program.\n";
+         <<"7.Quit from the program.\n";
          
     }
     
