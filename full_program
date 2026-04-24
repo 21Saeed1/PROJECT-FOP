@@ -678,13 +678,13 @@ void FifthOption(){
         switch(option){
             case 1:
                 // Delete a course record function();
-                cout << "Enter couse ID: "; //Done.
+                cout << "Enter course ID: "; //Done.
                 cin >> courseId;
                 deleteCourse(courseId);
                 break;
             case 2:
                 // Update a course record function();
-                cout << "Enter couse ID: "; //Done.
+                cout << "Enter course ID: "; //Done.
                 cin >> courseId;
                 updateCourse(courseId);
                 break;
@@ -709,7 +709,7 @@ void SixthOption(){
          <<"Students and courses report.\n\n"
          << string(45,'#')<<endl
          << "\n1.Students Report.\n"
-         << "2.Couses Report.\n"
+         << "2.Courses Report.\n"
          << "3.Go back.\n";
     do{
         cout <<"Option:";
@@ -720,7 +720,7 @@ void SixthOption(){
                 StudentsReport();
                 break;
             case 2:
-                // Couses Report function();
+                // Courses Report function();
                 CoursesReport();
                 break;
             case 3:
