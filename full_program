@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <iomanip>
 #include<stdlib.h>
@@ -25,6 +26,9 @@ struct Student
     string familyName;
     string fullName;
     int Student_id;
+    
+    int registeredCourses[10];
+    int coursesCount = 0;
     
     void createFullName() {
         fullName = firstName + " " + fatherName + " " + familyName;
@@ -171,6 +175,76 @@ void addStudent()
 }
 
 
+// Function to assign a Course.
+void assignCourse() {
+    int sId, cId;
+    cout << "Enter Student ID: ";
+    cin >> sId;
+    cout << "Enter Course ID to assign: ";
+    cin >> cId;
+
+    int sIndex = -1, cIndex = -1;
+    for (int i = 0; i < number_of_student; i++)
+    {
+        if (listOfStudent[i].Student_id == sId){
+            sIndex = i;
+            break;
+        }
+    }
+    for (int i = 0; i < number_of_courses; i++) {
+        if (courses[i].courseId == cId) {
+            cIndex = i; break; }
+    }
+
+    if (sIndex != -1 && cIndex != -1) {
+        if (listOfStudent[sIndex].coursesCount < 10) {
+            listOfStudent[sIndex].registeredCourses[listOfStudent[sIndex].coursesCount] = cId;
+            listOfStudent[sIndex].coursesCount++;
+            cout << "Course assigned successfully!\n";
+        } else {
+            cout << "Student reached maximum course limit.\n";
+                }
+    }
+    else { cout << "Student or Course not found!\n"; }
+
+    cout << "Press 0 to exit or any number to go back: ";
+    int input;
+    cin >> input;
+    if (input == 0)
+        program = false;
+}
+
+
+// Function to remove courese from student.
+void removeCourse() {
+    int sId, cId;
+    cout << "Enter Student ID: ";
+    cin >> sId;
+    cout << "Enter Course ID to remove: ";
+    cin >> cId;
+
+    for (int i = 0; i < number_of_student; i++) {
+        if (listOfStudent[i].Student_id == sId) {
+            for (int j = 0; j < listOfStudent[i].coursesCount; j++) {
+                if (listOfStudent[i].registeredCourses[j] == cId) {
+                    for (int k = j; k < listOfStudent[i].coursesCount - 1; k++) {
+                        listOfStudent[i].registeredCourses[k] = listOfStudent[i].registeredCourses[k + 1];
+                    }
+                    listOfStudent[i].coursesCount--;
+                    cout << "Course removed successfully!\n";
+                    cout << "Press 0 to exit or any number to go back: ";
+                    int input;
+                    cin >> input;
+                    if (input == 0)
+                        program = false;
+                    return;
+                }
+            }
+        }
+    }
+    cout << "Record not found!\n";
+}
+
 
 // The function to update student.
 void updateStudent(int studentId)
@@ -236,7 +310,7 @@ void deleteStudent( int studentId)
         program= false;
 }
 
-void StudentsReport(int studentID){}
+
 
 
 
@@ -261,7 +335,185 @@ void greeting(){
          
     }
     
+
+
+//function to searching by course ID
+void searchStudentById( int studentId)
+{
+    bool found = false;
+
+    for(int i =0 ; i< number_of_student; i++)
+    {
+        if ( listOfStudent[i].Student_id == studentId)
+        {
+            found = true;
+            cout << string(75,'#')<<endl;
+            cout << setw(17)<< "#"<< setw(35)<<"#"<< setw(23) << "#" <<endl
+            << setw(9) << "Id" <<setw(8) << "#" << setw(20) << "Name" <<setw(15) << "#"<<setw(15)
+            <<"Courses" <<setw(8)<< "#"<<endl<< string(75,'#')<<endl;
+            cout << setw(17)<< "#"<< setw(35)<<"#"<< setw(23) << "#" <<endl
+            << setw(17)<< "#"<< setw(35)<<"#"<< setw(23) << "#" <<endl;
+            
+            cout << left<< setw(16)<< listOfStudent[i].Student_id << "# " << left << setw(33)
+            << listOfStudent[i].fullName<< "#";
+            
+            if ( listOfStudent[i].coursesCount == 0){
+                cout.unsetf(std::ios_base::left);
+                cout << setw(23) << "#"<<endl;
+                cout<<string(75,'#')<<endl;
+
+            }
+            else {
+                for(int j = 0; j < listOfStudent[i].coursesCount;j ++)
+                {
+                    cout << " "<<j+1 <<"."<< left << setw(19);
+                    for(int m = 0; m <number_of_courses ; m ++)
+                    {
+                        if( listOfStudent[i].registeredCourses[j] == courses[m].courseId ){
+                            cout << courses[m].courseName<< "#" <<endl;
+                            
+                            if ( j < (listOfStudent[i].coursesCount -1)){
+                                cout << right <<setw(17)<< "#"<< setw(35)<<"#";;
+                            }
+                            
+                        }
+                    }
+                    }
+                cout<<string(75,'#')<<endl;
+                cout.unsetf(std::ios_base::left);
+
+            }
+        }
+        if(!found){
+            cout << "Student with id '" << studentId << "' not found.\n";
+        }
+    }
+    cout.unsetf(std::ios_base::left);
+    cout << "\nPress 0 to exit or any number to go back: ";
+    int input;
+    cin >> input;
+    if (input == 0)
+        program = false;
+
+}
     
+    
+
+
+
+
+
+ //function to searching by course ID
+void searchCourseById( int courseId)
+{
+    bool found = false;
+
+    for (int i = 0; i < number_of_courses; i++)
+    {
+        if (courses[i].courseId == courseId)
+        {
+            cout << "\nCourse found:\n";
+            cout << "ID: " << courses[i].courseId << endl;
+            cout << "Name: " << courses[i].courseName << endl;
+            cout << "Credit Hours: " << courses[i].creditHours << endl;
+
+            found = true;
+            break;
+        }
+    }
+
+    if (!found)
+    {
+        cout << "Course with ID " << courseId << " not found.\n";
+    }
+    cout << "\nPress 0 to exit or any number to go back: ";
+    int input;
+    cin >> input;
+    if (input == 0)
+        program = false;
+
+}
+
+
+void StudentsReport(){
+    cout << string(75,'#') << endl;
+
+    cout << setw(17) << "#" << setw(35) << "#" << setw(23) << "#" << endl << setw(9) << "Id" << setw(8) << "#" << setw(20) << "Name"
+         << setw(15) << "#" << setw(15) << "Courses" << setw(8) << "#" << endl << string(75,'#') << endl;
+
+    for(int i = 0; i < number_of_student; i++){
+        cout << setw(17) << "#" << setw(35) << "#" << setw(23) << "#" << endl << setw(17) << "#" << setw(35) << "#" << setw(23) << "#" << endl;
+        cout << left << setw(16) << listOfStudent[i].Student_id << "# " << left << setw(33) << listOfStudent[i].fullName << "#";
+
+        if(listOfStudent[i].coursesCount == 0 ){
+            cout.unsetf(std::ios_base::left);
+            cout << setw(23) << "#"<<endl;
+            cout<<string(75,'#')<<endl;
+        }
+        else{
+            for(int j = 0; j < listOfStudent[i].coursesCount; j++){
+                cout << " " << j + 1 << "."
+                << left << setw(19);
+                
+                for(int m = 0; m < number_of_courses; m++){
+                    if(listOfStudent[i].registeredCourses[j] == courses[m].courseId){
+                        cout << courses[m].courseName << "#" << endl;
+                        break; // stop after finding the course
+                    }
+                }
+                
+                // moved outside m loop
+                if(j < (listOfStudent[i].coursesCount - 1)){
+                    cout << right
+                    << setw(17) << "#"
+                    << setw(35) << "#";
+                }
+            }
+            
+            // moved outside j loop
+            cout << string(75,'#') << endl;
+            cout.unsetf(std::ios_base::left);
+        }
+        }
+
+    cout.unsetf(std::ios_base::left);
+
+    cout << "\nPress 0 to exit or any number to go back: ";
+    int input;
+    cin >> input;
+
+    if (input == 0)
+        program = false;
+}
+
+void CoursesReport()
+{
+    cout << string(75,'#')<<endl;
+    cout << setw(17)<< "#"<< setw(35)<<"#"<< setw(23) << "#" <<endl
+    << setw(9) << "Course Id" <<setw(8) << "#" << setw(20) << "Course Name" <<setw(15) << "#"<<setw(15)
+    <<"credit Hours" <<setw(8)<< "#"<<endl<< string(75,'#')<<endl;
+    
+    for(int i =0 ; i< number_of_courses; i++)
+    {
+        cout << setw(17)<< "#"<< setw(35)<<"#"<< setw(23) << "#" <<endl
+             << setw(17)<< "#"<< setw(35)<<"#"<< setw(23) << "#" <<endl;
+        cout << left<< setw(16)<< courses[i].courseId << "# " << left << setw(33)
+        << courses[i].courseName<< "#         "
+        << left << setw(13) << courses[i].creditHours<< "#" <<endl;
+
+        cout<<string(75,'#')<<endl;
+        cout.unsetf(std::ios_base::left);
+    }
+        cout << "\nPress 0 to exit or any number to go back: ";
+        int input;
+        cin >> input;
+            if (input == 0)
+                program = false;
+        
+}
+
+
+
 void FirstOption(){
     
     int option;
@@ -314,10 +566,10 @@ void SecondOption(){
         cin>>option;
         switch(option){
             case 1:
-                // The assigning cousrse to student function();
+                assignCourse();
                 break;
             case 2:
-                // The Remove course from a student function();
+                removeCourse();
                 break;
             case 3:
                 break;
@@ -342,14 +594,21 @@ void ThirdOption(){
          << "2.Searching for a course.\n"
          << "3.Go back.\n";
     do{
+        int Id;
         cout <<"Option:";
         cin>>option;
         switch(option){
             case 1:
                 // The Searching for a student function();
+                cout << "Enter Student ID: ";
+                cin >> Id;
+                searchStudentById(Id);
                 break;
             case 2:
                 // The Searching for a course function();
+                cout << "Enter course ID: ";
+                cin >> Id;
+                searchCourseById(Id);
                 break;
             case 3:
                 break;
@@ -458,9 +717,11 @@ void SixthOption(){
         switch(option){
             case 1:
                 // Students Report function();
+                StudentsReport();
                 break;
             case 2:
                 // Couses Report function();
+                CoursesReport();
                 break;
             case 3:
                 break;
@@ -506,9 +767,3 @@ int main(){
 
     return 0;
 }
-
-
-
-
-
-
